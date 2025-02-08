@@ -107,3 +107,5 @@ go.work.sum
 # vscode
 .vscode
 
+# Added by goreleaser init:
+dist/
