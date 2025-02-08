@@ -1,0 +1,33 @@
+{{ define "json" }}
+{{ . }}
+{{ end }}
+
+{{ define "raw" }}
+{{ . }}
+{{ end }}
+
+{{ define "alertmanager" }}
+*{{ if eq .Status "firing" }}🔥 FIRING:{{ else }}✅ RESOLVED:{{ end }} {{ range $key, $value := .GroupLabels }}{{ $value | escapeMarkdownV2 }} {{ end }}*
+{{- range .Alerts }}
+_Alert {{ .Status }}:_
+Annotations:
+{{- range $key, $value := .Annotations }}
+- {{ $key | escapeMarkdownV2 }}: {{ $value | escapeMarkdownV2 }}
+{{- end }}
+Labels:
+{{- range $key, $value := .Labels }}
+- {{ $key | escapeMarkdownV2 }}: {{ $value | escapeMarkdownV2 }}
+{{- end }}
+[Source]({{ .GeneratorURL }})
+---
+{{- end}}
+{{ end }}
+
+{{ define "fluxcd" }}
+{{ if eq .Severity "error" }}🚨{{ else }}💫{{ end }}*{{ .Message | escapeMarkdownV2 }}*
+
+{{ .InvolvedObject.Kind | toLower | escapeMarkdownV2 }}/{{ .InvolvedObject.Name | toLower | escapeMarkdownV2 }}.{{ .InvolvedObject.Namespace | toLower | escapeMarkdownV2 }}
+{{ range $key, $value := .Metadata }}
+*{{ $key | escapeMarkdownV2 }}:* {{ $value | escapeMarkdownV2 }}
+{{- end }}
+{{ end }}
