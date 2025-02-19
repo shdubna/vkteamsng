@@ -20,11 +20,11 @@ Vk Teams Notification Gateway - шлюз для отправки нотифик�
 - Скачать vkteamsng со [страницы релизов](https://github.com/shdubna/vktemasng/releases) или [contaner image](https://github.com/shdubna/vktemasng/pkgs/container/vktemasng)
 - запустить vkteamsng
 
-- в контенере:
+в контенере:
 ```bash
-docker run -d --name vkteamsng -e BOT_TOKEN=<токен бота vkteams> -p 8080:8080 vkteamsng
+docker run -d --name vkteamsng -e BOT_TOKEN=<токен бота vkteams> -p 8080:8080 ghcr.io/shdubna/vkteamsng
 ```
-или из бинарного
+или из бинарного файлаЖ
 ```bash
 export BOT_TOKEN=<токен бота vkteams>
 vkteamsng 
@@ -61,7 +61,7 @@ Usage of vkteamsng:
 
 ## Кастомные шаблоны
 
-Для подключения кастомных шаблонов сообщений труется создать файл с шаблонами go template и указать путь до файла флагом `-template_path`.
+Для подключения кастомных шаблонов сообщений требуется создать файл с шаблонами go template и указать путь до файла флагом `-template_path`.
 
 Шаблоны по умолчанию находятся в файле [default.tmpl](./templates/default.tmpl).
 
